@@ -1,18 +1,9 @@
-import mysql from 'mysql2/promise';
-import connectionDetails from '../env-reader/index.js';
 import migrations from './migration-reader.js';
 import migrationTable from './migration-table.js';
+import {connection} from '../connector/index.js';
 
-const createPool = () => {
-    return mysql.createPool({
-        host: connectionDetails.host,
-        user: connectionDetails.user,
-        password: connectionDetails.password,
-        database: connectionDetails.database,
-    });
-}
 
-const pool = createPool();
+const pool = connection;
 const tableName = 'migrations';
 
 const createMigrationtable = async () => {

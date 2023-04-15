@@ -9,6 +9,7 @@ const host = process.env.HOST || 'localhost';
 const database = process.env.DATABASE || 'postgres';
 const password = process.env.PASSWORD || 'postgres';
 const port = process.env.PORT || 5432;
+const connectionLimit = process.env.CONNECTION_LIMIT || 10;
 
 const connectionDetails = {
     connectionType,
@@ -16,7 +17,8 @@ const connectionDetails = {
     host,
     database,
     password,
-    port
+    port,
+    connectionLimit,
 }
 
 export default connectionDetails;
