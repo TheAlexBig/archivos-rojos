@@ -1,5 +1,4 @@
 import express from 'express';
-import {connection} from './connector/index.js';
 import { upgradeDatabase } from './changelog/index.js';
 
 
