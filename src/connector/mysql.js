@@ -7,6 +7,7 @@ export default () => {
         user: connectionDetails.user,
         password: connectionDetails.password,
         database: connectionDetails.database,
-        connectionLimit: connectionDetails.connectionLimit
+        connectionLimit: connectionDetails.connectionLimit,
+        namedPlaceholders: true,
     });
 }
