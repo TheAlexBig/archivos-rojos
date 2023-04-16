@@ -1,3 +1,4 @@
+import logger from '../logger.js';
 import migrations from './migration-reader.js';
 import migrationTable from './migration-table.js';
 import {connection} from '../connector/index.js';
@@ -10,10 +11,10 @@ const createMigrationtable = async () => {
     try {
       const connection = await pool.getConnection();
       await connection.query(migrationTable.script);
-      console.log('Migrations table created successfully.');
+      logger.info('Migrations table created successfully.');
       connection.release();
     } catch (error) {
-      console.error('Error creating migrations table:', error);
+      logger.error('Error creating migrations table:', error);
     }
   };
 
@@ -22,12 +23,12 @@ const createMigrationtable = async () => {
 const applyMigration = async (migration) => {
     const connection = await pool.getConnection();
     try {
-      console.log(`Applying migration ${migration.version}: ${migration.description}`);
+      logger.info(`Applying migration ${migration.version}: ${migration.description}`);
       await connection.query(migration.script);
       await connection.query(`INSERT INTO ${tableName} (identifier, version, description) VALUES (?, ?, ?)`, 
       [migration.identifier, migration.version, migration.description]);
     } catch (error) {
-      console.error(`Failed to apply migration ${migration.version}: ${error}`);
+      logger.error(`Failed to apply migration ${migration.version}: ${error}`);
       throw error;
     } finally {
       connection.release();
@@ -49,13 +50,13 @@ const getCurrentVersion = async () => {
 const upgradeDatabase = async () => {
     await createMigrationtable();
     const currentVersion = await getCurrentVersion();
-    console.log(`Current database version: ${currentVersion}`);
+    logger.info(`Current database version: ${currentVersion}`);
     for (const migration of migrations) {
       if (migration.version > currentVersion) {
         await applyMigration(migration);
       }
     }
-    console.log('Database migrations completed successfully');
+    logger.info('Database migrations completed successfully');
 };
 
 // Export the pool and upgradeDatabase function

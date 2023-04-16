@@ -16,10 +16,15 @@
   "author": "jose valladares",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "morgan": "^1.10.0",
     "mysql2": "^3.2.1",
     "path": "^0.12.7",
-    "url": "^0.11.0"
+    "sequelize": "^6.31.0",
+    "swagger-ui-express": "^4.6.2",
+    "url": "^0.11.0",
+    "winston": "^3.8.2"
   }
 }
