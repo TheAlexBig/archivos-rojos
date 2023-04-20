@@ -8,8 +8,8 @@ const getRedFiles = async  (req, res) => {
         const { page = 0, limit = 50, ...queryParams } = req.query;
     
         const searchConditions = {};
-        const exactMatchFields = ["institution", "dependency", "document_type", "place_and_date"];
-        const likeMatchFields = ["reference_code", "title"];
+        const exactMatchFields = ["institution", "dependency", "document_type"];
+        const likeMatchFields = ["reference_code", "title", "place_and_date"];
     
         // Set exact match conditions
         exactMatchFields.forEach((field) => {
@@ -24,16 +24,22 @@ const getRedFiles = async  (req, res) => {
             searchConditions[field] = { [Op.like]: `%${queryParams[field]}%` };
           }
         });
-    
+
         const offset = page * limit;
         const result = await RedFile.findAndCountAll({
           where: searchConditions,
           offset,
           limit,
         });
+
+        // Extract year from place_and_date field and add to result object
+        const processedRows = result.rows.map((row) => ({
+          ...row.dataValues,
+          year: row.dataValues.place_and_date.match(/\b\d{4}\b/g)?.[0] || "Sin fecha",
+        }));
     
         res.json({
-          data: result.rows,
+          data: processedRows,
           page,
           totalCount: result.count,
           totalPages: Math.ceil(result.count / limit),
