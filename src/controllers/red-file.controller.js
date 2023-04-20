@@ -26,10 +26,12 @@ const getRedFiles = async  (req, res) => {
         });
 
         const offset = page * limit;
+        const limitToInt = parseInt(limit);
+
         const result = await RedFile.findAndCountAll({
           where: searchConditions,
           offset,
-          limit,
+          limit: limitToInt,
         });
 
         // Extract year from place_and_date field and add to result object
