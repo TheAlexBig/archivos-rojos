@@ -18,15 +18,10 @@ Create a .env file at the root level
 - CONNECTION_LIMIT: The maximum number of connections to allow in the MySQL connection pool.
 - PORT: The port number to use for the API server.
 
-To start the API server, run the following command:
-`npm start`
+To start the API server, run the following command: `npm start`
 
-To start the API server in development mode, run the following command:
-`npm run dev`
+To start the API server in development mode, run the following command: `npm run dev`
 
-To run the test suite, run the following command:
-`npm test`
+To run the test suite, run the following command: `npm test`
 
-Note: Please make sure to install all the dependencies mentioned in package.json before starting the API. You can install them by running the following command:
-
-`npm install`
+Note: Please make sure to install all the dependencies mentioned in package.json before starting the API. You can install them by running the following command: `npm install`
