@@ -6,7 +6,6 @@ const Op = db.Sequelize.Op;
 const getRedFiles = async  (req, res) => {
     try {
         const { page = 0, limit = 50, ...queryParams } = req.query;
-    
         const searchConditions = {};
         const exactMatchFields = ["institution", "dependency", "document_type"];
         const likeMatchFields = ["reference_code", "title", "place_and_date"];
@@ -39,7 +38,7 @@ const getRedFiles = async  (req, res) => {
           ...row.dataValues,
           year: row.dataValues.place_and_date.match(/\b\d{4}\b/g)?.[0] || "Sin fecha",
         }));
-    
+
         res.json({
           data: processedRows,
           page,
