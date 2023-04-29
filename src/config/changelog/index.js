@@ -1,13 +1,12 @@
 import logger from '../logger.js';
 import migrations from './migration-reader.js';
 import migrationTable from './migration-table.js';
-import {connection} from '../connector/index.js';
+import { connection } from '../connector/index.js';
 
-
-const pool = connection;
 const tableName = 'migrations';
 
 const createMigrationtable = async () => {
+    const pool = await connection();
     try {
       const connection = await pool.getConnection();
       await connection.query(migrationTable.script);

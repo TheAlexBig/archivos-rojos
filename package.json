@@ -1,13 +1,14 @@
 {
   "name": "cabezas-jaguar",
   "version": "1.0.0",
-  "type": "module",
+  "type": "commonjs",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "babel-node build/index.js",
     "dev": "npx nodemon src/index.js",
-    "test": "jest --verbose --rootDir=./src"
+    "test": "jest",
+    "build": "babel src -d build --verbose"
   },
   "keywords": [
     "cabezas",
@@ -30,7 +31,14 @@
     "winston": "^3.8.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.5",
+    "@babel/core": "^7.21.5",
+    "@babel/node": "^7.20.7",
     "@babel/plugin-transform-modules-commonjs": "^7.21.2",
+    "@babel/plugin-transform-runtime": "^7.21.4",
+    "@babel/preset-env": "^7.21.5",
+    "babel-jest": "^29.5.0",
+    "esm": "^3.2.25",
     "jest": "^29.5.0"
   }
 }

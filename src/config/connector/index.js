@@ -4,6 +4,7 @@ import mysql from './mysql.js';
 
 const createConnection = async () => {
     const result = mysql();
+    logger.info('Migration manager connecting to database');
     try {
         await result.execute('SELECT 1');
         logger.info('Migration manager connection successful');
@@ -14,5 +15,7 @@ const createConnection = async () => {
     return result;
 }
 
-const connection = await createConnection();
+async function  connection() {
+    return await createConnection();
+}
 export { connection };

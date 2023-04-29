@@ -1,3 +1,4 @@
-export default {
-    extensionsToTreatAsEsm: [".spec"],
-  }
+module.exports = {
+  // other options...
+  extensionsToTreatAsEsm: [".spec"],
+};

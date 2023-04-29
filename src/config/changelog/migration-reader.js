@@ -2,8 +2,8 @@ import { readdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { join, dirname } from 'path';
 
-
-const migrationsFolder = join(dirname(fileURLToPath(import.meta.url)), 'migrations');
+const currentModuleUrl = `file://${__filename}`;
+const migrationsFolder = join(dirname(fileURLToPath(new URL(currentModuleUrl))), 'migrations');
 const migrationFiles = readdirSync(migrationsFolder);
 
 const migrations = [];
