@@ -3,11 +3,10 @@ import logger from '../logger.js';
 import mysql from './mysql.js';
 
 const createConnection = async () => {
-    
+    logger.info('Migration manager connecting to database...');
+    const result = mysql();
+    logger.info('Connection to database established');
     try {
-        logger.info('Migration manager connecting to database...');
-        const result = mysql();
-        logger.info('Connection to database established');
         await result.execute('SELECT 1');
         logger.info('Migration manager connection successful');
     } catch (err) {
