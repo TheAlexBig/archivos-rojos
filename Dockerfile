@@ -8,19 +8,17 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Copy package.json and package-lock.json
+# Copy babel config
 COPY babel.config.js ./
 
-# Copy package.json and package-lock.json
+# Copy source project
 COPY src ./
 
 # Install dependencies
 RUN npm install
 
+# Build the project
 RUN npm run build
-
-# Copy the rest of the application files
-COPY . .
 
 # Expose the application port
 EXPOSE 3000
