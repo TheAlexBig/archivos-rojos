@@ -18,6 +18,6 @@ const createConnection = async () => {
 }
 
 const connection = {};
-connection.use = createConnection();
+connection.use = createConnection;
 
 export default connection;
