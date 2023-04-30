@@ -1,13 +1,11 @@
 import logger from '../logger.js';
 import migrations from './migration-reader.js';
 import migrationTable from './migration-table.js';
-import { connection } from '../connector/index.js';
 
 const tableName = 'migrations';
 
-const pool = connection();
 
-const createMigrationtable = async () => {
+const createMigrationtable = async (pool) => {
     
     try {
       const connection = await pool.getConnection();
@@ -21,7 +19,7 @@ const createMigrationtable = async () => {
 
 
 // Function to apply a migration
-const applyMigration = async (migration) => {
+const applyMigration = async (pool, migration) => {
     const connection = await pool.getConnection();
     try {
       logger.info(`Applying migration ${migration.version}: ${migration.description}`);
@@ -37,7 +35,7 @@ const applyMigration = async (migration) => {
 };
 
 // Function to get the current database version
-const getCurrentVersion = async () => {
+const getCurrentVersion = async (pool) => {
     const connection = await pool.getConnection();
     try {
       const [rows] = await connection.query(`SELECT MAX(version) AS current_version FROM ${tableName}`);
@@ -48,13 +46,13 @@ const getCurrentVersion = async () => {
 };
 
 // Function to upgrade the database to the latest version
-const upgradeDatabase = async () => {
-    await createMigrationtable();
-    const currentVersion = await getCurrentVersion();
+const upgradeDatabase = async (pool) => {
+    await createMigrationtable(pool);
+    const currentVersion = await getCurrentVersion(pool);
     logger.info(`Current database version: ${currentVersion}`);
     for (const migration of migrations) {
       if (migration.version > currentVersion) {
-        await applyMigration(migration);
+        await applyMigration(pool, migration);
       }
     }
     logger.info('Database migrations completed successfully');

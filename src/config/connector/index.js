@@ -16,7 +16,4 @@ const createConnection = async () => {
     return result;
 }
 
-async function  connection() {
-    return await createConnection();
-}
-export { connection };
+export { createConnection };

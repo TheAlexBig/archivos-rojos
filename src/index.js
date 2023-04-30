@@ -19,7 +19,14 @@ app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json());
 
-upgradeDatabase();
+import { connection } from './config/connector/index.js';
+
+connection()
+.then((pool) => {
+    upgradeDatabase(pool);
+}).catch((err) => {
+    logger.error('Migrations: Unable to connect to the database:', err);
+})
 
 
 app.use(redFileRoutes);
