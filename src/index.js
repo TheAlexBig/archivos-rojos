@@ -19,9 +19,9 @@ app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json());
 
-import { connection } from './config/connector/index.js';
+import connection  from './config/connector/index.js';
 
-connection()
+connection.use()
 .then((pool) => {
     upgradeDatabase(pool);
 }).catch((err) => {
