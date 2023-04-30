@@ -5,8 +5,10 @@ import { connection } from '../connector/index.js';
 
 const tableName = 'migrations';
 
+const pool = await connection();
+
 const createMigrationtable = async () => {
-    const pool = await connection();
+    
     try {
       const connection = await pool.getConnection();
       await connection.query(migrationTable.script);
