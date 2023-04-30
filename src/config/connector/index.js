@@ -2,7 +2,7 @@
 import logger from '../logger.js';
 import mysql from './mysql.js';
 
-const use = () => {
+const use = function() {
     return mysql();
 }
 
