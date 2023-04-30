@@ -2,9 +2,6 @@
 import logger from '../logger.js';
 import mysql from './mysql.js';
 
-const fetchMysqlConnection = function() {
-    return mysql();
-}
 
 const createConnection = async () => {
     logger.info('Migration manager connecting to database...');
@@ -20,8 +17,7 @@ const createConnection = async () => {
     return result;
 }
 
-const connection = {
-    use: fetchMysqlConnection
-};
+const connection = {};
+connection.use = createConnection();
 
 export default connection;
