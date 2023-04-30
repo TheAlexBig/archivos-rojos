@@ -20,6 +20,8 @@ RUN npm install
 # Build the project
 RUN npm run build
 
+RUN rm -rf ./src
+
 # Expose the application port
 EXPOSE 3000
 
