@@ -12,7 +12,7 @@ COPY package*.json ./
 COPY babel.config.js ./
 
 # Copy source project
-COPY src ./
+COPY src ./src
 
 # Install dependencies
 RUN npm install
