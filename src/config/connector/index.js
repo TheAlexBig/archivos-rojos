@@ -2,7 +2,7 @@
 import logger from '../logger.js';
 import mysql from './mysql.js';
 
-const use = function() {
+const fetchMysqlConnection = function() {
     return mysql();
 }
 
@@ -20,7 +20,8 @@ const createConnection = async () => {
     return result;
 }
 
-const connection = {};
-connection.use = use;
+const connection = {
+    use: fetchMysqlConnection
+};
 
-export default createConnection;
+export default connection;
