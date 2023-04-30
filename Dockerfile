@@ -8,6 +8,12 @@ WORKDIR /app
 # Copy package.json and package-lock.json
 COPY package*.json ./
 
+# Copy package.json and package-lock.json
+COPY babel.config.js ./
+
+# Copy package.json and package-lock.json
+COPY src ./
+
 # Install dependencies
 RUN npm install
 
