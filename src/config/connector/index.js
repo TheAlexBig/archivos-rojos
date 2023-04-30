@@ -7,7 +7,7 @@ const createConnection = async () => {
     try {
         logger.info('Migration manager connecting to database...');
         const result = mysql();
-        logger.info('Migration manager connected to database');
+        logger.info('Connection to database established');
         await result.execute('SELECT 1');
         logger.info('Migration manager connection successful');
     } catch (err) {

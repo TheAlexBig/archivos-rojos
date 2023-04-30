@@ -1,16 +1,13 @@
 import { readdirSync } from 'fs';
-import { fileURLToPath } from 'url';
-import { join, dirname } from 'path';
+import { join } from 'path';
 
-const currentModuleUrl = `file://${__filename}`;
-const migrationsFolder = join(dirname(fileURLToPath(new URL(currentModuleUrl))), 'migrations');
+const migrationsFolder = join(__dirname, 'migrations');
 const migrationFiles = readdirSync(migrationsFolder);
 
 const migrations = [];
 
 migrationFiles.forEach(async file => {
-    const filePath = 'file://' + join(migrationsFolder, file).replace(/\\/g, '/');
-    const module = await import(filePath);
+    const module = require(join(migrationsFolder, file));
     const migration = module.default;
     migrations.push(migration);
 });
