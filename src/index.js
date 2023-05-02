@@ -41,7 +41,7 @@ db.sequelize
   });
 
 // set port, listen for requests
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.BACKEND_PORT || 8080;
 app.listen(PORT, () => {
     logger.info(`Server is running on port.`, { port:  PORT});
 });
