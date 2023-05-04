@@ -23,7 +23,7 @@ RUN npm run build
 RUN rm -rf ./src
 
 # Expose the application port
-EXPOSE 3000
+EXPOSE $BACKEND_PORT
 
 # Start the application
 CMD ["npm", "start"]
