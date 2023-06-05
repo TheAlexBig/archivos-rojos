@@ -11,9 +11,12 @@ import redFileRoutes from './routes/red-file.routes.js';
 import cors  from 'cors';
 import db from './models/index.js';
 
-const corsOptions = {
-  origin: "http://localhost:8081"
-};
+const FRONT_PORT = process.env.FRONTEND_PORT || 80;
+const FRONTEND_HOST = process.env.FRONTEND_HOST || localhost;
+
+app.use(cors({
+  origin: `http://${FRONTEND_HOST}:${FRONT_PORT}` 
+}));
 
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
@@ -28,8 +31,8 @@ connection.use()
     logger.error('Migrations: Unable to connect to the database:', err);
 })
 
-
-app.use(redFileRoutes);
+const preffix = '/api';
+app.use(preffix, redFileRoutes);
 
 db.sequelize
   .authenticate()
