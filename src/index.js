@@ -18,7 +18,7 @@ app.use(cors({
   origin: `http://${FRONTEND_HOST}:${FRONT_PORT}` 
 }));
 
-app.use(cors(corsOptions));
+
 // parse requests of content-type - application/json
 app.use(express.json());
 
