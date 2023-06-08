@@ -3,9 +3,9 @@ import connectionDetails from '../env-reader.js';
 
 export default () => {
     return mysql.createPool({
-        host: connectionDetails.host,
-        user: connectionDetails.user,
-        password: connectionDetails.password,
+        host: connectionDetails.dbHost,
+        user: connectionDetails.dbUser,
+        password: connectionDetails.dbPassword,
         database: connectionDetails.database,
         connectionLimit: connectionDetails.connectionLimit,
         namedPlaceholders: true,
