@@ -5,7 +5,7 @@ import migrationTable from './migration-table.js';
 const tableName = 'migrations';
 
 
-const createMigrationtable = async (pool) => {
+const createMigrationTable = async (pool) => {
     
     try {
       const connection = await pool.getConnection();
@@ -39,7 +39,7 @@ const getCurrentVersion = async (pool) => {
     const connection = await pool.getConnection();
     try {
       const [rows] = await connection.query(`SELECT MAX(version) AS current_version FROM ${tableName}`);
-      return rows[0].current_version || 0;
+      return rows[0].version || 0;
     } finally {
       connection.release();
     }
@@ -47,7 +47,7 @@ const getCurrentVersion = async (pool) => {
 
 // Function to upgrade the database to the latest version
 const upgradeDatabase = async (pool) => {
-    await createMigrationtable(pool);
+    await createMigrationTable(pool);
     const currentVersion = await getCurrentVersion(pool);
     logger.info(`Current database version: ${currentVersion}`);
     for (const migration of migrations) {

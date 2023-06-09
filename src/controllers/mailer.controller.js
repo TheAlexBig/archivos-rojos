@@ -1,6 +1,10 @@
+import logger from "../config/logger.js";
+
 import nodemailer from 'nodemailer';
 import fs from 'fs/promises';
 import ejs from 'ejs';
+import db from "../models/index.js";
+const User = db.user;
 
 import connectionDetails from '../config/env-reader.js';
 
@@ -16,7 +20,7 @@ const transporter = nodemailer.createTransport({
 });
 
 // Function to send an email
-const sendEmail = async (to, subject, templateFile, data) => {
+const sendEmail = async (templateFile, data, res) => {
   try {
     // Read the email template file
     const template = await fs.readFile(templateFile, 'utf8');
@@ -24,24 +28,41 @@ const sendEmail = async (to, subject, templateFile, data) => {
     // Render the template with the provided data
     const html = ejs.render(template, data);
 
-    // Configure the email options
-    const mailOptions = {
+    const clientEmail = {
       from: connectionDetails.mailSource,
-      to,
-      subject,
+      to: data.email,
+      subject: `Solicitud de reserva ${data.fullName}`,
       html
     };
 
-    // Send the email
-    const info = await transporter.sendMail(mailOptions);
-    console.log('Email sent:', info.messageId);
-  } catch (error) {
-    console.error('Error sending email:', error);
+    const latestUser = await User.findOne({
+      attributes: ['email'],
+      order: [['created_at', 'DESC']]
+    });
+
+    const supportEmail = {
+      from: connectionDetails.mailSource,
+      to: latestUser.email,
+      subject: `Solicitud de reserva ${data.fullName}`,
+      html
+    };
+
+    // Send the emails
+    const supportInfo = await transporter.sendMail(supportEmail);
+    logger.info('Support email sent:', supportInfo.messageId);
+    const clientInfo = await transporter.sendMail(clientEmail);
+    logger.info('Client email sent:', clientInfo.messageId);
+
+    // Send response back with status code 200
+    res.status(200).json({ message: 'Emails sent successfully' });
+  } catch (err) {
+    logger.error(err);
+    res.status(500).send({
+      message: "Error occurred while sending emails.",
+    });
   }
 };
 
 
 
-export {sendEmail};
-
-//sendEmail('recipient@example.com', 'Example Subject', 'path/to/template.ejs', emailData);
+export {sendEmail, transporter};

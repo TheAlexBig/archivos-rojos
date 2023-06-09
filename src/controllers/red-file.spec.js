@@ -6,7 +6,7 @@ jest.mock('../config/logger.js', () => ({
   info: jest.fn(),
 }));
 
-describe('getRedFiles', () => {
+describe('Red File Controller', () => {
   let req;
   let res;
 
