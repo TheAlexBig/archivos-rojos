@@ -1,11 +1,15 @@
 import { Router } from 'express';
-import { getRedFiles } from '../controllers/red-file.controller.js';
+import { getRedFiles, getRedFile } from '../controllers/red-file.controller.js';
 import {sendEmail} from "../controllers/mailer.controller";
 
 const router = Router();
 
 router.get('/red-file', async (req, res) => {
   await getRedFiles(req, res);
+});
+
+router.get('/red-file/:code', async (req, res) => {
+  await getRedFile(req, res);
 });
 
 router.get('/red-file/contact', async (req, res) => {

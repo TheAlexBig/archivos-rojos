@@ -25,7 +25,7 @@ const getRedFiles = async  (req, res) => {
         });
 
         const offset = page * limit;
-        const limitToInt = parseInt(limit);
+        const limitToInt = parseInt(limit+'');
 
         const result = await RedFile.findAndCountAll({
           where: searchConditions,
@@ -53,4 +53,26 @@ const getRedFiles = async  (req, res) => {
       }
 };
 
-export {getRedFiles}
+const getRedFile = async (req, res) => {
+    try {
+        const reference_code = req.params.code;
+
+        const redFile = await RedFile.findOne({
+            where: { reference_code },
+        });
+
+        if (!redFile) {
+            return res.status(404).json({
+                message: "Red file not found.",
+            });
+        }
+
+        res.json(redFile);
+    } catch (err) {
+        logger.info(err);
+        res.status(500).send({
+            message: "Error occurred while retrieving the red file.",
+        });
+    }
+};
+export { getRedFiles, getRedFile };
