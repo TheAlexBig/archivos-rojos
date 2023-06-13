@@ -20,6 +20,7 @@ export default (sequelize, Sequelize) => {
             }
         },
         {
-            tableName: 'users'
+            tableName: 'users',
+            timestamps: false,
         });
 };
