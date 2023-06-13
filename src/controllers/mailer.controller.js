@@ -54,9 +54,9 @@ const sendEmail = async (templateFile, data, res) => {
     };
 
     // Send the emails
-    const supportInfo = await transporter.sendMail(supportEmail);
+    const supportInfo = transporter.sendMail(supportEmail);
     logger.info('Support email sent:', supportInfo.messageId);
-    const clientInfo = await transporter.sendMail(clientEmail);
+    const clientInfo = transporter.sendMail(clientEmail);
     logger.info('Client email sent:', clientInfo.messageId);
 
     // Send response back with status code 200
