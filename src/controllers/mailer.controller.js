@@ -14,8 +14,8 @@ import connectionDetails from '../config/env-reader.js';
 // Create a transporter object with your SMTP server details
 const transporter = nodemailer.createTransport({
   host: connectionDetails.mailHost,
-  port: connectionDetails.mailPort, // SMTP port
-  secure: false, // true for 465, false for other ports
+  port: connectionDetails.mailPort, 
+  secure: true,
   auth: {
     user: connectionDetails.mailAuth.mailUser,
     pass: connectionDetails.mailAuth.mailPass
