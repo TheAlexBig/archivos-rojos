@@ -29,7 +29,7 @@ const transporter = nodemailer.createTransport({
 // Function to send an email
 const sendEmail = async (templateFile, data, res) => {
   try {
-    const fileLocation = join(__dirname, '../templates/request.ejs');
+    const fileLocation = join(__dirname, templateFile);
 
     // Read the email template file
     const template = fs.readFileSync(fileLocation, 'utf8');
