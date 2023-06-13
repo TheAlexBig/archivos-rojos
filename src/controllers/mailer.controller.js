@@ -1,7 +1,7 @@
 import logger from '../config/logger.js';
 
 import nodemailer from 'nodemailer';
-import fs from 'fs/promises';
+import { readFile } from 'fs/promises';
 import ejs from 'ejs';
 import path from 'path';
 import db from '../models/index.js';
@@ -28,7 +28,7 @@ const sendEmail = async (templateFile, data, res) => {
     const fileLocation = path.resolve(__dirname, templateFile);
 
     // Read the email template file
-    const template = fs.readFileSync(fileLocation, 'utf8');
+    const template = await readFile(fileLocation, 'utf8');
 
 
     // Render the template with the provided data
