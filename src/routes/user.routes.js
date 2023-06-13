@@ -3,7 +3,7 @@ import { insertUser } from '../controllers/user.controller';
 
 const router = Router();
 
-router.get('/user', async (req, res) => {
+router.post('/user', async (req, res) => {
     await insertUser(req, res);
 });
 
