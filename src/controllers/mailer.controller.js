@@ -1,10 +1,10 @@
-import logger from "../config/logger.js";
+import logger from '../config/logger.js';
 
 import nodemailer from 'nodemailer';
 import fs from 'fs/promises';
 import ejs from 'ejs';
 import path from 'path';
-import db from "../models/index.js";
+import db from '../models/index.js';
 const User = db.user;
 
 import connectionDetails from '../config/env-reader.js';
@@ -61,10 +61,10 @@ const sendEmail = async (templateFile, data, res) => {
 
     // Send response back with status code 200
     res.status(200).json({ message: 'Emails sent successfully' });
-  } catch (err) {
-    logger.error(err);
+  } catch (error) {
+    logger.error('Error occurred while sending emails.', error);
     res.status(500).send({
-      message: "Error occurred while sending emails.",
+      message: 'Error occurred while sending emails.',
     });
   }
 };
