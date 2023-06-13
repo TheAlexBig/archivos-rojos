@@ -18,7 +18,7 @@ COPY src ./src
 RUN npm i npm@latest -g
 
 # Install dependencies
-RUN npm ci
+RUN npm install --verbose
 
 # Build the project
 RUN npm run build
