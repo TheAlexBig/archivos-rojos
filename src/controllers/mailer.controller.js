@@ -9,16 +9,25 @@ const User = db.user;
 
 import connectionDetails from '../config/env-reader.js';
 
-
-
-// Create a transporter object with your SMTP server details
-const transporter = nodemailer.createTransport({
+const config = {
+  pool: true,
   host: connectionDetails.mailHost,
   port: connectionDetails.mailPort, 
   secure: true,
   auth: {
     user: connectionDetails.mailAuth.mailUser,
     pass: connectionDetails.mailAuth.mailPass
+  }
+}
+
+// Create a transporter object with your SMTP server details
+const transporter = nodemailer.createTransport(config);
+
+transporter.verify(function (error, success) {
+  if (error) {
+    logger.error(error);
+  } else {
+    logger.info("Server is ready to take our messages");
   }
 });
 
