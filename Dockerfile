@@ -17,8 +17,8 @@ COPY src ./src
 # Update to latest node version
 npm install -g npm@latest
 
-# Install dependencies
-RUN npm install
+# Update to latest node version
+RUN npm i npm@latest -g
 
 # Build the project
 RUN npm run build
