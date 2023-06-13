@@ -6,7 +6,7 @@ FROM node:current-alpine3.17
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package*.json ./
+COPY package.json ./
 
 # Copy babel config
 COPY babel.config.js ./
