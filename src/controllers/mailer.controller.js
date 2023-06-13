@@ -4,9 +4,16 @@ import nodemailer from 'nodemailer';
 import fs from 'fs/promises';
 import ejs from 'ejs';
 import db from "../models/index.js";
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 const User = db.user;
 
 import connectionDetails from '../config/env-reader.js';
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
 
 // Create a transporter object with your SMTP server details
 const transporter = nodemailer.createTransport({
@@ -22,8 +29,11 @@ const transporter = nodemailer.createTransport({
 // Function to send an email
 const sendEmail = async (templateFile, data, res) => {
   try {
+    const fileLocation = join(__dirname, '../templates/request.ejs');
+
     // Read the email template file
-    const template = await fs.readFile(templateFile, 'utf8');
+    const template = fs.readFileSync(fileLocation, 'utf8');
+
 
     // Render the template with the provided data
     const html = ejs.render(template, data);
