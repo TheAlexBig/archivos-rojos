@@ -39,7 +39,7 @@ const getCurrentVersion = async (pool) => {
     const connection = await pool.getConnection();
     try {
       const [rows] = await connection.query(`SELECT MAX(version) AS current_version FROM ${tableName}`);
-      return rows[0].version || 0;
+      return rows[0].current_version || 0;
     } finally {
       connection.release();
     }
