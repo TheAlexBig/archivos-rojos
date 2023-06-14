@@ -38,8 +38,6 @@ const sendEmail = async (templateFile, data, res) => {
     // Read the email template file
     const fileHandle = await readFile(fileLocation, 'utf8');
     const template = fileHandle.toString();
-    // Close the file handle after reading
-    await close(fileHandle);
 
     // Render the template with the provided data
     const html = ejs.render(template, data);

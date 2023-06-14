@@ -24,7 +24,7 @@ const applyMigration = async (pool, migration) => {
     try {
       logger.info(`Applying migration ${migration.version}: ${migration.description}`);
       await connection.query(migration.script);
-      await connection.query(`INSERT INTO ${tableName} (identifier, version, description) VALUES (?, ?, ?)`, 
+      await connection.query(`INSERT INTO ${tableName} (identifier, version, description) VALUES (?, ?, ?);`, 
       [migration.identifier, migration.version, migration.description]);
     } catch (error) {
       logger.error(`Failed to apply migration ${migration.version}: ${error}`);
@@ -38,8 +38,8 @@ const applyMigration = async (pool, migration) => {
 const getCurrentVersion = async (pool) => {
     const connection = await pool.getConnection();
     try {
-      const [rows] = await connection.query(`SELECT MAX(version) AS current_version FROM ${tableName}`);
-      return rows[0].current_version || 0;
+      const [rows] = await connection.query(`SELECT * FROM ${tableName} ORDER BY timestamp DESC LIMIT 1;`);
+      return rows[0].version || 0;
     } finally {
       connection.release();
     }

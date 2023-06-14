@@ -1,6 +1,6 @@
 export default {
   id: "04152023-1600-001",
-  version: 1,
+  version: 0,
   description: 'First migation that will store all the others',
   script: `
     CREATE TABLE IF NOT EXISTS migrations (

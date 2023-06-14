@@ -1,6 +1,6 @@
 export default {
-  identifier: "06082023-1600-001-AR-002",
-  version: 3,
+  identifier: "06082023-1600-AR-002",
+  version: 2,
   description: 'Create users table',
   script: `
     CREATE TABLE IF NOT EXISTS users (

@@ -1,6 +1,6 @@
 export default {
   identifier: "04152023-1600-AR-001",
-  version: 2,
+  version: 1,
   description: 'Create red_file table',
   script: `
     CREATE TABLE IF NOT EXISTS red_file (
