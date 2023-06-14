@@ -13,7 +13,7 @@ router.get('/red-file/:code', async (req, res) => {
 });
 
 router.post('/red-file/contact', async (req, res) => {
-  const {fullName, email, date, description, code} = req.query;
+  const {fullName, email, date, description, code} = req.body;
 
   const data = {
     fullName: fullName || 'John Doe',
