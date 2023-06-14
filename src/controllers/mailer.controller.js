@@ -1,7 +1,7 @@
 import logger from '../config/logger.js';
 
 import nodemailer from 'nodemailer';
-import { readFile } from 'fs/promises';
+import { readFile, close  } from 'fs/promises';
 import ejs from 'ejs';
 import path from 'path';
 import db from '../models/index.js';
@@ -35,20 +35,14 @@ transporter.verify(function (error, success) {
 const sendEmail = async (templateFile, data, res) => {
   try {
     const fileLocation = path.resolve(__dirname, templateFile);
-
     // Read the email template file
-    const template = await readFile(fileLocation, 'utf8');
-
+    const fileHandle = await readFile(fileLocation, 'utf8');
+    const template = fileHandle.toString();
+    // Close the file handle after reading
+    await close(fileHandle);
 
     // Render the template with the provided data
     const html = ejs.render(template, data);
-
-    const clientEmail = {
-      from: connectionDetails.mailSource,
-      to: data.email,
-      subject: `Solicitud de reserva ${data.fullName}`,
-      html
-    };
 
     const latestUser = await User.findOne({
       attributes: ['email'],
@@ -65,8 +59,6 @@ const sendEmail = async (templateFile, data, res) => {
     // Send the emails
     const supportInfo = transporter.sendMail(supportEmail);
     logger.info('Support email sent:', supportInfo.messageId);
-    const clientInfo = transporter.sendMail(clientEmail);
-    logger.info('Client email sent:', clientInfo.messageId);
 
     // Send response back with status code 200
     res.status(200).json({ message: 'Emails sent successfully' });
