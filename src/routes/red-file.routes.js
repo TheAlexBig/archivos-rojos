@@ -12,6 +12,8 @@ router.get('/red-file/:code', async (req, res) => {
   await getRedFile(req, res);
 });
 
+const redFileContact = '../templates/request.ejs';
+
 router.post('/red-file/contact', async (req, res) => {
   const {fullName, email, date, description, code} = req.body;
 
@@ -23,9 +25,7 @@ router.post('/red-file/contact', async (req, res) => {
     code: code || 'red-file name'
   };
 
-  const templateFile = '../templates/request.ejs';
-
-  await sendEmail(templateFile, data, res)
+  await sendEmail(redFileContact, data, res)
 });
 
 
