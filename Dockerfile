@@ -14,9 +14,6 @@ COPY babel.config.js ./
 # Copy source project
 COPY src ./src
 
-# Update to latest node version
-RUN npm i npm@latest -g
-
 # Install dependencies
 RUN npm install --verbose
 
