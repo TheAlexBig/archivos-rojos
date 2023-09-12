@@ -15,10 +15,20 @@ app.use(morgan('combined', { stream }));
 
 const FRONT_PORT = process.env.FRONTEND_PORT || 80;
 const FRONTEND_HOST = process.env.FRONTEND_HOST || 'localhost';
+const DEV_PORT = process.env.DEV_PORT || '3000';
 
-app.use(cors({
+const corsOptions = {
     origin: `http://${FRONTEND_HOST}:${FRONT_PORT}`
-}));
+};
+
+if (process.env.PROFILE === 'dev') {
+    corsOptions.origin = [
+        `http://${FRONTEND_HOST}:${FRONT_PORT}`,
+        `http://localhost:${DEV_PORT}`,
+    ];
+}
+
+app.use(cors(corsOptions));
 
 // Parse requests of content-type - application/json
 app.use(express.json());
