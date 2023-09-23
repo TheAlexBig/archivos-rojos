@@ -7,8 +7,9 @@ const getRedFiles = async  (req, res) => {
     try {
         const { page = 0, limit = 50, ...queryParams } = req.query;
         const searchConditions = {};
-        const exactMatchFields = ["institution", "dependency", "document_type"];
-        const likeMatchFields = ["reference_code", "title", "place_and_date"];
+        const exactMatchFields = [];
+        const likeMatchFields = ["reference_code", "title", "place_and_date", 
+        "institution", "document_type", "dependency"];
     
         // Set exact match conditions
         exactMatchFields.forEach((field) => {
