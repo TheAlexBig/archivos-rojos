@@ -1,6 +1,10 @@
 import { Router } from 'express';
 import { getRedFiles, getRedFile } from '../controllers/red-file.controller.js';
 import {sendEmail} from "../controllers/mailer.controller";
+import { join } from 'path';
+
+const pdfFilePath = join(__dirname, 'pdfs', 'example.pdf');
+
 
 const router = Router();
 
@@ -26,6 +30,12 @@ router.post('/red-file/contact', async (req, res) => {
   };
 
   await sendEmail(redFileContact, data, res)
+});
+
+router.get('/download-pdf', (req, res) => {
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename="Catálogo.pdf"');
+  res.sendFile(pdfFilePath);
 });
 
 
