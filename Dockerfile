@@ -3,6 +3,7 @@ FROM node:alpine
 
 
 # Set the working directory
+RUN mkdir /app
 WORKDIR /app
 
 # Copy package.json and package-lock.json
