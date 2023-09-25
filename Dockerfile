@@ -1,5 +1,5 @@
 # Base image
-FROM node:slim
+FROM node:alpine
 
 
 # Set the working directory
