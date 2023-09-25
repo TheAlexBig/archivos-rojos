@@ -8,17 +8,17 @@ const pdfFilePath = join(__dirname, 'pdfs', 'example.pdf');
 
 const router = Router();
 
-router.get('/red-file', async (req, res) => {
+router.get('/', async (req, res) => {
   await getRedFiles(req, res);
 });
 
-router.get('/red-file/:code', async (req, res) => {
+router.get('/:code', async (req, res) => {
   await getRedFile(req, res);
 });
 
 const redFileContact = '../templates/request.ejs';
 
-router.post('/red-file/contact', async (req, res) => {
+router.post('/contact', async (req, res) => {
   const {fullName, email, date, description, code} = req.body;
 
   const data = {

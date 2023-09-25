@@ -44,7 +44,7 @@ connection.use()
 
 // Define routes
 const prefix = '/api';
-app.use(prefix, redFileRoutes);
+app.use(prefix+'/red-file', redFileRoutes);
 app.use(prefix, userRoutes);
 
 // Authenticate Sequelize connection
