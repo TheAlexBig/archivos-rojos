@@ -44,7 +44,7 @@ const sendEmail = async (templateFile, data, res) => {
 
     const latestUser = await User.findOne({
       attributes: ['email'],
-      order: [['created_at', 'DESC']]
+      order: [['id', 'DESC']]
     });
 
     const supportEmail = {

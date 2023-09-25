@@ -2,14 +2,43 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Reserva de Archivo</title>
+    <title>Confirmación de Reserva de Archivo Rojo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        .info {
+            margin: 10px 0;
+            color: #555;
+        }
+        .info strong {
+            font-weight: bold;
+        }
+    </style>
 </head>
 <body>
-    <h1>Reserva de Archivo Rojo</h1>
-    <p>Nombre completo: <%= fullName %></p>
-    <p>Correo de contacto: <%= email %></p>
-    <p>Fecha deseada de la reserva: <%= date %></p>
-    <p>Descripción o motivo: <%= description %></p>
-    <p>Código de referencia: <%= code %></p>
+    <div class="container">
+        <h1>Confirmación de Reserva de Archivo Rojo</h1>
+        <p class="info"><strong>Código de referencia:</strong> <%= code %></p>
+        <p class="info"><strong>Nombre:</strong> <%= fullName %></p>
+        <p class="info"><strong>Corre:</strong> <%= email %></p>
+        <p class="info"><strong>Fecha de reserva:</strong> <%= date %></p>
+        <p class="info"><strong>Descripción o motivo:</strong> <%= description %></p>
+    </div>
 </body>
 </html>
