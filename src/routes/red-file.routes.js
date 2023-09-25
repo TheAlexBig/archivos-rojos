@@ -3,7 +3,7 @@ import { getRedFiles, getRedFile } from '../controllers/red-file.controller.js';
 import {sendEmail} from "../controllers/mailer.controller";
 import { join } from 'path';
 
-const pdfFilePath = join(__dirname, 'pdfs', 'example.pdf');
+const pdfFilePath = join(__dirname, 'pdfs', 'Catálogo.pdf');
 
 
 const router = Router();
