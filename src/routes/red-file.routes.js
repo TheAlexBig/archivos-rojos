@@ -12,6 +12,13 @@ router.get('/', async (req, res) => {
   await getRedFiles(req, res);
 });
 
+
+router.get('/download-pdf', (req, res) => {
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename="Catálogo.pdf"');
+  res.sendFile(pdfFilePath);
+});
+
 router.get('/:code', async (req, res) => {
   await getRedFile(req, res);
 });
@@ -31,12 +38,5 @@ router.post('/contact', async (req, res) => {
 
   await sendEmail(redFileContact, data, res)
 });
-
-router.get('/download-pdf', (req, res) => {
-  res.setHeader('Content-Type', 'application/pdf');
-  res.setHeader('Content-Disposition', 'attachment; filename="Catálogo.pdf"');
-  res.sendFile(pdfFilePath);
-});
-
 
 export default router;
