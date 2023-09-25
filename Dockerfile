@@ -16,10 +16,10 @@ COPY babel.config.js ./
 COPY src ./src
 
 # Install dependencies
-RUN npm install --verbose
+RUN yarn install
 
 # Build the project
-RUN npm run build
+RUN yarn build
 
 RUN rm -rf ./src
 
@@ -27,4 +27,4 @@ RUN rm -rf ./src
 EXPOSE $BACKEND_PORT
 
 # Start the application
-CMD ["npm", "start"]
+CMD ["sh", "-c", "yarn start"]
