@@ -6,8 +6,10 @@ FROM node:alpine
 RUN mkdir /app
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package.json 
 COPY package.json ./
+# Copy yarn.lock
+COPY yarn.lock ./
 
 # Copy babel config
 COPY babel.config.js ./
