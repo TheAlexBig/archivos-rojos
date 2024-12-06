@@ -5,10 +5,10 @@ dotenv.config();
 // Access environment variables
 const connectionDetails = {
     dbConnectionType: process.env.CONNECTION_TYPE || 'mysql',
-    dbUser:  process.env.MYSQL_USER || 'postgres',
+    dbUser:  process.env.MYSQL_USER || 'mysql',
     dbHost:  process.env.MYSQL_HOST || 'localhost',
-    database:  process.env.MYSQL_DATABASE || 'postgres',
-    dbPassword:  process.env.MYSQL_PASSWORD || 'postgres',
+    database:  process.env.MYSQL_DATABASE || 'mysql',
+    dbPassword:  process.env.MYSQL_PASSWORD || 'mysql',
     dbPort: process.env.MYSQL_DB_PORT || 5432,
     connectionLimit:  process.env.BACKEND_CONNECTION_LIMIT || 10,
     mailHost: process.env.MAIL_HOST || 'localhost',
